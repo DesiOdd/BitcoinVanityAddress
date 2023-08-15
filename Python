@@ -1,0 +1,15 @@
+import bitcoin
+
+def generate_address_with_prefix(prefix):
+    while True:
+        private_key = bitcoin.random_key()
+        public_key = bitcoin.privtopub(private_key)
+        address = bitcoin.pubtoaddr(public_key)
+        
+        if address.startswith('1' + prefix):  # Bitcoin addresses typically start with "1"
+            return address, private_key
+
+prefix = input("Enter desired prefix (after the '1'): ")
+address, private_key = generate_address_with_prefix(prefix)
+print(f"Address: {address}")
+print(f"Private Key: {private_key}")
